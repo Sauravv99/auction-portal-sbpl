@@ -150,7 +150,7 @@ export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
               {!player.Reserved ? (
                   <div className="d-flex">
                     {/* Sold - EDITABLE */}
-                    <div className="col-6 col-md-3">
+                    <div className="col-3 col-md-3">
                       <label className="form-label small mb-1">Sold</label>
                       <select
                         className="form-select form-select-sm"
@@ -164,7 +164,7 @@ export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
                     </div>
 
                     {/* Price - EDITABLE */}
-                    <div className="col-6 col-md-3 ps-1">
+                    <div className="col-3 col-md-3 ps-1">
                       <label className="form-label small mb-1">Price</label>
                       <input
                         type="number"
@@ -174,7 +174,7 @@ export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
                       />
                     </div>
 
-                    <div className="col-12 col-md-6 ps-1">
+                    <div className="col-6 col-md-6 ps-1">
                       <label className="form-label small mb-1">Team</label>
                       <select
                         className="form-select form-select-sm"
