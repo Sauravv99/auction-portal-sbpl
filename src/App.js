@@ -1,6 +1,8 @@
 // src/App.jsx
 import React, { useEffect, useState, useCallback } from "react";
 import PlayersCardsBootstrap from "./components/playerCards";
+import PlayersCarousel from "./components/playerCarousel";
+import "./App.css"
 
 /**
  * Editable Gist JSON editor for players_list.json
@@ -162,20 +164,14 @@ export default function App() {
   if (loading) return <div style={{ padding: 16 }}>Loading…</div>;
 
   return (
-    <div
-      style={{
-        padding: 16,
-        fontFamily: "system-ui, sans-serif",
-        maxWidth: 1100,
-      }}
-    >
+    <div className="app-container p-4">
       {error && (
         <div style={{ color: "crimson", marginBottom: 12 }}>
           <strong>Error:</strong> {error}
         </div>
       )}
 
-      <PlayersCardsBootstrap
+      <PlayersCarousel
         players={players}
         updateItem={updateItem}
         removeRow={removeRow}
@@ -186,7 +182,7 @@ export default function App() {
         error={error}
       />
 
-      <div style={{ marginTop: 18 }}>
+      {/* <div style={{ marginTop: 18 }}>
         <h4>Raw JSON preview</h4>
         <pre
           style={{
@@ -198,7 +194,7 @@ export default function App() {
         >
           {JSON.stringify(players, null, 2)}
         </pre>
-      </div>
+      </div> */}
     </div>
   );
 }
