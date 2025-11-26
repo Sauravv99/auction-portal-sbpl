@@ -1,8 +1,8 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import defaultImg from "../assests/images/profile-img.png"
-import './players.css';
+import defaultImg from "../assests/images/profile-img.png";
+import "./players.css";
 
 function parseDOBString(dobStr) {
   // Accepts "DD-MM-YYYY" or "DD/MM/YYYY" or ISO "YYYY-MM-DD"
@@ -34,7 +34,7 @@ function parseDOBString(dobStr) {
     return null;
   }
 
-  if ([day, month, year].some(v => Number.isNaN(v))) return null;
+  if ([day, month, year].some((v) => Number.isNaN(v))) return null;
   return new Date(year, month - 1, day);
 }
 
@@ -52,39 +52,33 @@ function calculateAgeFromDOBString(dobStr) {
 
 export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
   const age = calculateAgeFromDOBString(player.DOB);
-  
-  const playerImage = player.image 
-  ? require(`../assests/images/${player.image}`)
-  : require(`../assests/images/default-img.png`);
+
+  const playerImage = player.image
+    ? require(`../assests/images/${player.image}`)
+    : require(`../assests/images/default-img.png`);
   // : require(`../assests/images/profile-img.png`);
 
   return (
     <div className="player-card rounded-3 shadow-sm border p-3 d-flex align-items-center gap-3">
-      {/* LEFT: image / icon — takes ~40% */}
       <div className="card-left d-flex align-items-center justify-content-center">
-        {/* If you switch to an actual image later, replace the <i> with:
-            <img src={player.imageUrl} alt={player.PlayerName} className="player-image" />
-         */}
-        {/* <div className="profile-icon d-flex align-items-center justify-content-center rounded-3 bg-dark"> */}
         <div className="">
           {/* <i className="bi bi-person fs-2" aria-hidden="true"></i> */}
-           <img
-              src={playerImage}
-              alt={player.PlayerName}
-              className="player-image"
-            />
+          <img
+            src={playerImage}
+            alt={player.PlayerName}
+            className="player-image"
+          />
         </div>
       </div>
 
-      {/* RIGHT: details — takes ~60% */}
       <div className="card-right flex-grow-1">
         <div className="d-flex justify-content-between align-items-start">
           <div>
-            <h5 className="mb-0">{player.PlayerName || "Unnamed Player"}</h5>
+            <h3 className="mb-0">{player.PlayerName || "Unnamed Player"}</h3>
             <small className="text-muted">{player.Team || "—"}</small>
           </div>
 
-          <div className="text-end">
+          {/* <div className="text-end">
             <div className="text-muted small">Sr {player.id ?? index + 1}</div>
             <button
               type="button"
@@ -93,11 +87,10 @@ export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
             >
               Remove
             </button>
-          </div>
+          </div> */}
         </div>
 
         <div className="row mt-3 gx-2 gy-2">
-          {/* Player Name - READ ONLY */}
           <div className="col-12 col-md-6">
             <label className="form-label small mb-1">Player Name</label>
             <input
@@ -108,17 +101,20 @@ export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
             />
           </div>
 
-          {/* Team - EDITABLE */}
-          <div className="col-12 col-md-6">
-            <label className="form-label small mb-1">Team</label>
-            <input
-              className="form-control form-control-sm"
-              value={player.Team ?? ""}
-              onChange={(e) => onChange(index, "Team", e.target.value)}
-            />
-          </div>
+          {player.Reserved ? (
+            <div className="col-12 col-md-6">
+              <label className="form-label small mb-1">Team</label>
+              <input
+                className="form-control form-control-sm"
+                value={player.Team ?? ""}
+                readOnly
+                disabled
+              />
+            </div>
+          ) : (
+            " "
+          )}
 
-          {/* DOB -> Age */}
           <div className="col-6 col-md-3">
             <label className="form-label small mb-1">Age</label>
             <div className="form-control form-control-sm" aria-live="polite">
@@ -126,7 +122,6 @@ export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
             </div>
           </div>
 
-          {/* Contact - READ ONLY */}
           <div className="col-6 col-md-3">
             <label className="form-label small mb-1">Contact</label>
             <input
@@ -137,7 +132,6 @@ export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
             />
           </div>
 
-          {/* Speciality - READ ONLY */}
           <div className="col-6 col-md-3">
             <label className="form-label small mb-1">Speciality</label>
             <input
@@ -148,25 +142,60 @@ export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
             />
           </div>
 
-          {/* Sold - EDITABLE */}
-          <div className="col-6 col-md-3">
-            <label className="form-label small mb-1">Sold</label>
-            <input
-              className="form-control form-control-sm"
-              value={player.Sold ?? ""}
-              onChange={(e) => onChange(index, "Sold", e.target.value)}
-            />
-          </div>
+         
+            <>
+              <div className="pt-2 mt-2">
+                <h4>Bid Details : </h4>
+              </div>
+              {!player.Reserved ? (
+                  <div className="d-flex">
+                    {/* Sold - EDITABLE */}
+                    <div className="col-6 col-md-3">
+                      <label className="form-label small mb-1">Sold</label>
+                      <select
+                        className="form-select form-select-sm"
+                        value={player.Sold ?? ""}
+                        onChange={(e) => onChange(index, "Sold", e.target.value)}
+                      >
+                        <option value="">Select Team</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                      </select>
+                    </div>
 
-          {/* Price - EDITABLE */}
-          <div className="col-6 col-md-3">
-            <label className="form-label small mb-1">Price</label>
-            <input
-              className="form-control form-control-sm"
-              value={player.Price ?? ""}
-              onChange={(e) => onChange(index, "Price", e.target.value)}
-            />
-          </div>
+                    {/* Price - EDITABLE */}
+                    <div className="col-6 col-md-3 ps-1">
+                      <label className="form-label small mb-1">Price</label>
+                      <input
+                        type="number"
+                        className="form-control form-control-sm"
+                        value={player.Price ?? ""}
+                        onChange={(e) => onChange(index, "Price", e.target.value)}
+                      />
+                    </div>
+
+                    <div className="col-12 col-md-6 ps-1">
+                      <label className="form-label small mb-1">Team</label>
+                      <select
+                        className="form-select form-select-sm"
+                        value={player.Team ?? ""}
+                        onChange={(e) => onChange(index, "Team", e.target.value)}
+                      >
+                        <option value="Not Reserved">Select Team</option>
+                        <option value="Bombaywala 11">Bombaywala 11</option>
+                        <option value="CSK">CSK</option>
+                        <option value="KKR">KKR</option>
+                        <option value="SSS">SSS</option>
+                        <option value="Director King - Srimali Warriors">
+                          Director King - Srimali Warriors
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+              ):(
+                <p className="not-available">This player is not available for auction as the player is reserved by {player.Team} team</p>
+              )}
+            </>
         </div>
       </div>
     </div>

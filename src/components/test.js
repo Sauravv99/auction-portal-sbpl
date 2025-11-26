@@ -8,7 +8,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 2,
@@ -19,7 +19,7 @@
     "Speciality": "बोदलंग",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 3,
@@ -30,7 +30,7 @@
     "Speciality": "Batting",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 4,
@@ -41,7 +41,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 5,
@@ -52,7 +52,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 6,
@@ -63,7 +63,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 7,
@@ -74,7 +74,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 8,
@@ -85,7 +85,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 9,
@@ -96,7 +96,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 10,
@@ -107,7 +107,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 11,
@@ -118,7 +118,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 12,
@@ -129,7 +129,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 13,
@@ -140,7 +140,7 @@
     "Speciality": "Batting",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 14,
@@ -151,7 +151,7 @@
     "Speciality": "Batting",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 15,
@@ -162,7 +162,7 @@
     "Speciality": "Keeping",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 16,
@@ -173,7 +173,7 @@
     "Speciality": "Bowling",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 17,
@@ -184,7 +184,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 18,
@@ -195,7 +195,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 19,
@@ -206,7 +206,7 @@
     "Speciality": "Batting",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 20,
@@ -217,7 +217,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 21,
@@ -228,7 +228,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 22,
@@ -239,7 +239,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 23,
@@ -250,7 +250,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 24,
@@ -261,7 +261,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 25,
@@ -272,7 +272,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 26,
@@ -283,7 +283,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 27,
@@ -294,7 +294,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 28,
@@ -305,7 +305,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 29,
@@ -316,7 +316,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 30,
@@ -327,7 +327,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 31,
@@ -690,7 +690,7 @@
     "Speciality": "All-Rounder",
     "Sold": "No",
     "Price": 0,
-"Reserved": false
+"Reserved": true
   },
   {
     "id": 64,

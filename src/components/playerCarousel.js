@@ -21,23 +21,11 @@ export default function PlayersCarousel({ players = [], updateItem, removeRow, l
     if (!el) return;
     const items = el.querySelectorAll('.carousel-item');
     items.forEach((it, i) => it.classList.toggle('active', i === 0));
-  }, [players]);
+  }, []);
 
   return (
     <div className="container py-4">
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <div>
-          <h2 className="mb-0">Players List</h2>
-          <div className="small text-muted">Auction for SBPL</div>
-        </div>
-
-        <div className="d-flex gap-2">
-          <button className="btn btn-outline-secondary" onClick={load}>Reload</button>
-          <button className="btn btn-dark" onClick={addRow}>Add Row</button>
-          <button className="btn btn-primary" onClick={saveToGist} disabled={saving}>{saving ? 'Saving…' : 'Save'}</button>
-        </div>
-      </div>
-
+  
       {error && <div className="alert alert-danger">{error}</div>}
 
       {/* data-bs-ride="carousel" */}

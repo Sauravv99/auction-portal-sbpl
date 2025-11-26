@@ -3,6 +3,8 @@ import React, { useEffect, useState, useCallback } from "react";
 import PlayersCardsBootstrap from "./components/playerCards";
 import PlayersCarousel from "./components/playerCarousel";
 import "./App.css"
+import PlayerGrid from "./components/playerGrid";
+import HeaderComponent from "./header/header";
 
 /**
  * Editable Gist JSON editor for players_list.json
@@ -25,6 +27,7 @@ export default function App() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState(null);
   const [token, setToken] = useState(process.env.REACT_APP_GITHUB_TOKEN);
+  const [viewMode, setViewMode] = useState("carousel");
 
   // fetch(`${GIST_API}?t=${Date.now()}`, {
 
@@ -865,6 +868,25 @@ export default function App() {
     });
   }
 
+//   function updateItem(index, field, value) {
+//   console.log("fields", field, value);
+
+//   setPlayers((prev) => {
+//     const copy = (prev || []).map((it) => ({ ...it }));
+
+//     // Update the field normally
+//     copy[index] = { ...copy[index], [field]: value };
+
+//     // Additional logic for Sold
+//     if (field === "Sold") {
+//       copy[index].Reserved = value === "Yes";
+//     }
+
+//     return copy;
+//   });
+// }
+
+
   function addRow() {
     setPlayers((prev) => [
       ...(prev || []),
@@ -968,17 +990,47 @@ export default function App() {
         </div>
       )}
 
-      <PlayersCarousel
-        players={players}
-        updateItem={updateItem}
-        removeRow={removeRow}
-        load={load}
-        addRow={addRow}
-        saveToGist={saveToGist}
-        saving={saving}
-        error={error}
-      />
+        <HeaderComponent load={load} addRow={addRow} saveToGist={saveToGist} saving={saving} />
+       <div className="btn-group toggle-btns" role="group" aria-label="View toggle">
+          <button
+            type="button"
+            className={`btn btn-sm ${viewMode === "grid" ? "btn-primary" : "btn-outline-primary"}`}
+            onClick={() => setViewMode("grid")}
+          >
+            Grid
+          </button>
+          <button
+            type="button"
+            className={`btn btn-sm ${viewMode === "carousel" ? "btn-primary" : "btn-outline-primary"}`}
+            onClick={() => setViewMode("carousel")}
+          >
+            Carousel
+          </button>
+        </div>
 
+        {viewMode === "carousel" ? (
+              <PlayersCarousel
+                players={players}
+                updateItem={updateItem}
+                removeRow={removeRow}
+                load={load}
+                addRow={addRow}
+                saveToGist={saveToGist}
+                saving={saving}
+                error={error}
+              />
+        ):(
+              <PlayerGrid
+                players={players}
+                updateItem={updateItem}
+                removeRow={removeRow}
+                load={load}
+                addRow={addRow}
+                saveToGist={saveToGist}
+                saving={saving}
+                error={error}
+              />
+        )}
     </div>
   );
 }

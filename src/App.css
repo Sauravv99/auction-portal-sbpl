@@ -40,3 +40,7 @@
 /* .app-container{
   background-color: black;
 } */
+
+.toggle-btns{
+      float: inline-end;
+}

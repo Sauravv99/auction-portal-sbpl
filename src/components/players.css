@@ -31,3 +31,13 @@
   height: fit-content;
   top: 50%;
 }
+
+.form-select {
+  cursor: pointer;
+}
+
+.not-available{
+  margin: 18px 0px;
+  font-style: italic;
+  font-weight: 500;
+}
