@@ -18,3 +18,10 @@
     background-color: black;
     align-items: anchor-center;
 }
+
+
+
+.carousel-control-next , .carousel-control-prev{
+  height: fit-content;
+  top: 50%;
+}
