@@ -8,7 +8,8 @@
 .player-card {
     background-color: #d0e5f7; 
 }
-  .profile-icon {
+
+/* .profile-icon {
     width: 68px;
     height: 68px;
     display: flex;
@@ -17,8 +18,13 @@
     justify-content: center;
     background-color: black;
     align-items: anchor-center;
+} */
+.player-image{
+  width: 180px;
+  height: 180px;
+  border-radius: 5px;
+  margin: 6px 6px;
 }
-
 
 
 .carousel-control-next , .carousel-control-prev{

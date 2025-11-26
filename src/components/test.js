@@ -1,174 +1,794 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-
-export default function PlayersCardsBootstrap({
-  players = [],
-  updateItem,
-  removeRow,
-  load,
-  addRow,
-  saveToGist,
-  saving,
-  error,
-}) {
-  return (
-    <div className="container py-4">
-      {/* Header */}
-      <div className="d-flex justify-content-between align-items-center mb-3">
-        <h2>Players List — Modern Cards</h2>
-        <div>
-          <button className="btn btn-secondary me-2" onClick={load}>
-            Reload
-          </button>
-          <button className="btn btn-dark me-2" onClick={addRow}>
-            Add Row
-          </button>
-          <button
-            className="btn btn-primary"
-            onClick={saveToGist}
-            disabled={saving}
-          >
-            {saving ? "Saving..." : "Save"}
-          </button>
-        </div>
-      </div>
-
-      {error && <div className="alert alert-danger">{error}</div>}
-
-      {/* Carousel */}
-      <div id="playersCarousel" className="carousel slide" data-bs-ride="false">
-        <div className="carousel-inner">
-          {players.map((p, index) => (
-            <div
-              key={index}
-              className={`carousel-item ${index === 0 ? "active" : ""}`}
-            >
-              <div className="card shadow-sm mx-auto" style={{ maxWidth: 450 }}>
-                <div className="card-body">
-                  <h5 className="card-title fw-bold">
-                    {p.PlayerName || "Unnamed Player"}
-                  </h5>
-                  <h6 className="text-muted">{p.Team}</h6>
-
-                  <div className="mt-3">
-                    {/* Fields */}
-                    <div className="mb-2">
-                      <label className="form-label">Player Name</label>
-                      <input
-                        className="form-control"
-                        value={p.PlayerName}
-                        onChange={(e) =>
-                          updateItem(index, "PlayerName", e.target.value)
-                        }
-                      />
-                    </div>
-
-                    <div className="mb-2">
-                      <label className="form-label">Team</label>
-                      <input
-                        className="form-control"
-                        value={p.Team}
-                        onChange={(e) =>
-                          updateItem(index, "Team", e.target.value)
-                        }
-                      />
-                    </div>
-
-                    <div className="mb-2">
-                      <label className="form-label">Address</label>
-                      <input
-                        className="form-control"
-                        value={p.Address}
-                        onChange={(e) =>
-                          updateItem(index, "Address", e.target.value)
-                        }
-                      />
-                    </div>
-
-                    <div className="row">
-                      <div className="col-6 mb-2">
-                        <label className="form-label">DOB</label>
-                        <input
-                          type="date"
-                          className="form-control"
-                          value={p.DOB}
-                          onChange={(e) =>
-                            updateItem(index, "DOB", e.target.value)
-                          }
-                        />
-                      </div>
-                      <div className="col-6 mb-2">
-                        <label className="form-label">Contact</label>
-                        <input
-                          className="form-control"
-                          value={p.Contact}
-                          onChange={(e) =>
-                            updateItem(index, "Contact", e.target.value)
-                          }
-                        />
-                      </div>
-                    </div>
-
-                    <div className="row">
-                      <div className="col-6 mb-2">
-                        <label className="form-label">Speciality</label>
-                        <input
-                          className="form-control"
-                          value={p.Speciality}
-                          onChange={(e) =>
-                            updateItem(index, "Speciality", e.target.value)
-                          }
-                        />
-                      </div>
-                      <div className="col-6 mb-2">
-                        <label className="form-label">Fees</label>
-                        <input
-                          className="form-control"
-                          value={p.Fees}
-                          onChange={(e) =>
-                            updateItem(index, "Fees", e.target.value)
-                          }
-                        />
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="d-flex justify-content-between mt-3">
-                    <button
-                      className="btn btn-outline-danger"
-                      onClick={() => removeRow(index)}
-                    >
-                      Remove
-                    </button>
-                    <small className="text-muted">
-                      Card {index + 1}/{players.length}
-                    </small>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* Carousel controls */}
-        <button
-          className="carousel-control-prev"
-          type="button"
-          data-bs-target="#playersCarousel"
-          data-bs-slide="prev"
-        >
-          <span className="carousel-control-prev-icon"></span>
-        </button>
-
-        <button
-          className="carousel-control-next"
-          type="button"
-          data-bs-target="#playersCarousel"
-          data-bs-slide="next"
-        >
-          <span className="carousel-control-next-icon"></span>
-        </button>
-      </div>
-    </div>
-  );
-}
+[
+  {
+    "id": 1,
+    "Team": "Bombaywala 11",
+    "PlayerName": "Darshit Yogesh Vohra",
+    "DOB": "03-03-2008",
+    "Contact": "8484919018",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 2,
+    "Team": "Bombaywala 11",
+    "PlayerName": "Hritik Omprakash Vyas",
+    "DOB": "21-10-1998",
+    "Contact": "8975705008",
+    "Speciality": "बोदलंग",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 3,
+    "Team": "Bombaywala 11",
+    "PlayerName": "Pratik Omprakash Vyas",
+    "DOB": "20-03-2001",
+    "Contact": "7843085584",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 4,
+    "Team": "Bombaywala 11",
+    "PlayerName": "Rishabh Pradeep Vyas",
+    "DOB": "10-09-2002",
+    "Contact": "8975577008",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 5,
+    "Team": "Bombaywala 11",
+    "PlayerName": "Rushab Thakur",
+    "DOB": "07-02-1999",
+    "Contact": "9924717402",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 6,
+    "Team": "CSKk",
+    "PlayerName": "Nayan Mahesh Trivedi",
+    "DOB": "13-10-1999",
+    "Contact": "7028133306",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 7,
+    "Team": "CSK",
+    "PlayerName": "Mahesh Pannalalji Trivedi",
+    "DOB": "25-09-1973",
+    "Contact": "7391999711",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 8,
+    "Team": "CSK",
+    "PlayerName": "Navneet Mahesh Trivedi",
+    "DOB": "06-03-2002",
+    "Contact": "9561794502",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 9,
+    "Team": "CSK",
+    "PlayerName": "Dipesh Ravindra Dave",
+    "DOB": "20-06-1995",
+    "Contact": "8975975715",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 10,
+    "Team": "CSK",
+    "PlayerName": "Ayush Murli Joshi",
+    "DOB": "03-10-2004",
+    "Contact": "9075857808",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 11,
+    "Team": "Director King - Srimali Warriors",
+    "PlayerName": "Mayur Ajay Vyas",
+    "DOB": "12-11-1990",
+    "Contact": "6301642515",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 12,
+    "Team": "Director King - Srimali Warriors",
+    "PlayerName": "Pratiek Satish Vyas",
+    "DOB": "10-05-2006",
+    "Contact": "7206470370",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 13,
+    "Team": "Director King - Srimali Warriors",
+    "PlayerName": "Atharva Joshi",
+    "DOB": "28-02-2025",
+    "Contact": "8421473397",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 14,
+    "Team": "Director King - Srimali Warriors",
+    "PlayerName": "Akshad Manoj Joshi",
+    "DOB": "19-03-2005",
+    "Contact": "8788060029",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 15,
+    "Team": "Director King - Srimali Warriors",
+    "PlayerName": "Roshan Manishi Joshi",
+    "DOB": "24-12-1997",
+    "Contact": "7020080425",
+    "Speciality": "Keeping",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 16,
+    "Team": "Director King - Srimali Warriors",
+    "PlayerName": "Pratik Ajay Vyas",
+    "DOB": "01-12-5",
+    "Contact": "9860039432",
+    "Speciality": "Bowling",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 17,
+    "Team": "KKR",
+    "PlayerName": "Dilip Liladhar Trivedi",
+    "DOB": "19-01-1983",
+    "Contact": "9923992000",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 18,
+    "Team": "KKR",
+    "PlayerName": "Toshi Girish Trivedi",
+    "DOB": "24-08-1993",
+    "Contact": "9096806858",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 19,
+    "Team": "KKR",
+    "PlayerName": "Saurav Nitin Trivedi",
+    "DOB": "16-12-1999",
+    "Contact": "8766728876",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 20,
+    "Team": "KKR",
+    "PlayerName": "Nitin Shantilal Trivedi",
+    "DOB": "05-11-1974",
+    "Contact": "9823103080",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 21,
+    "Team": "KKR",
+    "PlayerName": "Gaurav Dave",
+    "DOB": "28-03-2003",
+    "Contact": "9307667179",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 22,
+    "Team": "Nagpur Titans",
+    "PlayerName": "Ujjwal Oza",
+    "DOB": "12-07-2004",
+    "Contact": "9579224450",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 23,
+    "Team": "Nagpur Titans",
+    "PlayerName": "Yogesh Harish Ojha",
+    "DOB": "02-11-2000",
+    "Contact": "7843061681",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 24,
+    "Team": "Nagpur Titans",
+    "PlayerName": "Shubham Ramchandra Ozha",
+    "DOB": "15-09-1995",
+    "Contact": "7620218345",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 25,
+    "Team": "Nagpur Titans",
+    "PlayerName": "Priyanshu Vyas",
+    "DOB": "05-03-2007",
+    "Contact": "9116499711",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 26,
+    "Team": "Nagpur Titans",
+    "PlayerName": "Deepesh Ramchandra Ozha",
+    "DOB": "16-09-2000",
+    "Contact": "9975128149",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 27,
+    "Team": "SSS",
+    "PlayerName": "Ashwary Shrimali",
+    "DOB": "18-11-1994",
+    "Contact": "7615833544",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 28,
+    "Team": "SSS",
+    "PlayerName": "Rajat Bhavanishankar Ji Joshi",
+    "DOB": "15-03-1990",
+    "Contact": "9595393929",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 29,
+    "Team": "SSS",
+    "PlayerName": "Anil Bhawrlal Vyas",
+    "DOB": "05-09-1984",
+    "Contact": "8390131791",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 30,
+    "Team": "SSS",
+    "PlayerName": "Umesh Rajesh Dave",
+    "DOB": "07-10-1990",
+    "Contact": "8624007646",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 31,
+    "Team": "Not Reserved",
+    "PlayerName": "Mitesh Trivedi",
+    "DOB": "04-03-1988",
+    "Contact": "9356202977",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 32,
+    "Team": "Not Reserved",
+    "PlayerName": "Satish Omprakash Dave",
+    "DOB": "10-02-1986",
+    "Contact": "9960432333",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 33,
+    "Team": "Not Reserved",
+    "PlayerName": "Dipesh Joshi",
+    "DOB": "01-07-1994",
+    "Contact": "8446519783",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 34,
+    "Team": "Not Reserved",
+    "PlayerName": "Rishi Dave",
+    "DOB": "12-09-2010",
+    "Contact": "8269662696",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 35,
+    "Team": "Not Reserved",
+    "PlayerName": "Rakesh Joshi",
+    "DOB": "03-10-1989",
+    "Contact": "9021419629",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 36,
+    "Team": "Not Reserved",
+    "PlayerName": "Yashkumar Arjunji Dave",
+    "DOB": "16-10-1988",
+    "Contact": "9595291329",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 37,
+    "Team": "Not Reserved",
+    "PlayerName": "Jitesh Trivedi",
+    "DOB": "24-07-2025",
+    "Contact": "9172172598",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 38,
+    "Team": "Not Reserved",
+    "PlayerName": "Bhavesh Rajesh Trivedi",
+    "DOB": "14-09-2002",
+    "Contact": "8983826746",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 39,
+    "Team": "Not Reserved",
+    "PlayerName": "Mayur Trivedi",
+    "DOB": "05-05-1998",
+    "Contact": "7620465605",
+    "Speciality": "Bowling",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 40,
+    "Team": "Not Reserved",
+    "PlayerName": "Vijay Shrimali",
+    "DOB": "25-02-1988",
+    "Contact": "7020438080",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 41,
+    "Team": "Not Reserved",
+    "PlayerName": "Kulbhushan Nirmalji Trivedi",
+    "DOB": "14-02-1992",
+    "Contact": "7020427658",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 42,
+    "Team": "Not Reserved",
+    "PlayerName": "Harshvardhan Ramesh Vyas",
+    "DOB": "03-08-1986",
+    "Contact": "8602639300",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 43,
+    "Team": "Not Reserved",
+    "PlayerName": "Shekhar Dave",
+    "DOB": "22-02-1987",
+    "Contact": "8955221787",
+    "Speciality": "Bowling",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 44,
+    "Team": "Not Reserved",
+    "PlayerName": "Pawan Nilkanth Joshi",
+    "DOB": "21-10-1987",
+    "Contact": "7875127431",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 45,
+    "Team": "Not Reserved",
+    "PlayerName": "Saurabh Mahendra Dave",
+    "DOB": "28-10-2001",
+    "Contact": "9834275607",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 46,
+    "Team": "Not Reserved",
+    "PlayerName": "Prince Deepak Trivedi",
+    "DOB": "10-12-2009",
+    "Contact": "7219225745",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 47,
+    "Team": "Not Reserved",
+    "PlayerName": "Himanshu Yugalkishore Vidawat",
+    "DOB": "30-01-2010",
+    "Contact": "9423118826",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 48,
+    "Team": "Not Reserved",
+    "PlayerName": "Pankaj Bhavarlal Trivedi",
+    "DOB": "17-10-1982",
+    "Contact": "9890846624",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 49,
+    "Team": "Not Reserved",
+    "PlayerName": "Hardik Devendra Ozha",
+    "DOB": "12-09-2012",
+    "Contact": "9579518442",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 50,
+    "Team": "Not Reserved",
+    "PlayerName": "Dinesh Himmatlal Joshi",
+    "DOB": "25-12-1990",
+    "Contact": "7620180459",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 51,
+    "Team": "Not Reserved",
+    "PlayerName": "Krishna Manoj Dave",
+    "DOB": "06-09-2007",
+    "Contact": "8668376056",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 52,
+    "Team": "Not Reserved",
+    "PlayerName": "Shekhar",
+    "DOB": "02-02-1986",
+    "Contact": "8055221786",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 53,
+    "Team": "Not Reserved",
+    "PlayerName": "Riddham Hemant Vyas",
+    "DOB": "30-12-2010",
+    "Contact": "07620928284",
+    "Speciality": "Bowling",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 54,
+    "Team": "Not Reserved",
+    "PlayerName": "Jeet Bhupesh Dave",
+    "DOB": "29-12-2008",
+    "Contact": "8983268696",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 55,
+    "Team": "Not Reserved",
+    "PlayerName": "Ravi Gopalkrishna Dave",
+    "DOB": "08-06-1987",
+    "Contact": "9924756661",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 56,
+    "Team": "Not Reserved",
+    "PlayerName": "Jay Dilip Dave",
+    "DOB": "29-05-1993",
+    "Contact": "8888842220",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 57,
+    "Team": "Not Reserved",
+    "PlayerName": "Yaksh Anil Vyas",
+    "DOB": "13-08-2012",
+    "Contact": "7507983348",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 58,
+    "Team": "Not Reserved",
+    "PlayerName": "Yuvraj Trivedi",
+    "DOB": "08-09-2010",
+    "Contact": "9511633035",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 59,
+    "Team": "Not Reserved",
+    "PlayerName": "Nishant Shrimali",
+    "DOB": "05-04-1996",
+    "Contact": "7410093103",
+    "Speciality": "Bowling",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 60,
+    "Team": "Not Reserved",
+    "PlayerName": "Meet Harish Trivedi",
+    "DOB": "25-11-2005",
+    "Contact": "9325005280",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 61,
+    "Team": "Not Reserved",
+    "PlayerName": "Bharat Manish Vyas",
+    "DOB": "10-10-1991",
+    "Contact": "9579249091",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 62,
+    "Team": "Not Reserved",
+    "PlayerName": "Punit Umendra Shrimali",
+    "DOB": "22-11-2000",
+    "Contact": "9146115807",
+    "Speciality": "Bowling",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 63,
+    "Team": "SSS",
+    "PlayerName": "Kapil Shrimali",
+    "DOB": "24-12-2000",
+    "Contact": "7023470271",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 64,
+    "Team": "Not Reserved",
+    "PlayerName": "Yash Shrimali",
+    "DOB": "04-08-1996",
+    "Contact": "9672313783",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 65,
+    "Team": "Not Reserved",
+    "PlayerName": "Yugal Shantilal Vyas",
+    "DOB": "13-06-1984",
+    "Contact": "9665630671",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 66,
+    "Team": "Not Reserved",
+    "PlayerName": "Joyal Dilip Joshi",
+    "DOB": "02-05-1989",
+    "Contact": "7387575151",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 67,
+    "Team": "Not Reserved",
+    "PlayerName": "Himanshu Yugalkishore Vidawat",
+    "DOB": "30-01-2010",
+    "Contact": "9423118816",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 68,
+    "Team": "Not Reserved",
+    "PlayerName": "Jay Gopalji Trivedi",
+    "DOB": "10-03-1995",
+    "Contact": "9767396288",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 69,
+    "Team": "Not Reserved",
+    "PlayerName": "Yugalkishore Kesarilal Vidawat",
+    "DOB": "01-06-1978",
+    "Contact": "9423118816",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 70,
+    "Team": "Not Reserved",
+    "PlayerName": "Nitin Trivedi",
+    "DOB": "26-07-1996",
+    "Contact": "9461956184",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 71,
+    "Team": "Not Reserved",
+    "PlayerName": "Anup Ojha",
+    "DOB": "29-03-2001",
+    "Contact": "9309109229",
+    "Speciality": "Batting",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  },
+  {
+    "id": 72,
+    "Team": "Not Reserved",
+    "PlayerName": "Mohit Vyas",
+    "DOB": "15-09-2001",
+    "Contact": "9509273772",
+    "Speciality": "All-Rounder",
+    "Sold": "No",
+    "Price": 0,
+"Reserved": false
+  }
+]

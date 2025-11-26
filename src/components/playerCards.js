@@ -1,30 +1,82 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import defaultImg from "../assests/images/profile-img.png"
 import './players.css';
 
-// PlayersCardsBootstrap.jsx
-// Exports a modern, split-card PlayerCard and a Carousel wrapper component.
+function parseDOBString(dobStr) {
+  // Accepts "DD-MM-YYYY" or "DD/MM/YYYY" or ISO "YYYY-MM-DD"
+  if (!dobStr) return null;
+  const dashParts = dobStr.split("-");
+  const slashParts = dobStr.split("/");
+  let day, month, year;
 
-// --- PlayerCard: presentational component ---
+  if (dashParts.length === 3 && dashParts[0].length === 4) {
+    // "YYYY-MM-DD"
+    year = parseInt(dashParts[0], 10);
+    month = parseInt(dashParts[1], 10);
+    day = parseInt(dashParts[2], 10);
+  } else if (dashParts.length === 3) {
+    // "DD-MM-YYYY"
+    day = parseInt(dashParts[0], 10);
+    month = parseInt(dashParts[1], 10);
+    year = parseInt(dashParts[2], 10);
+  } else if (slashParts.length === 3) {
+    // "DD/MM/YYYY"
+    day = parseInt(slashParts[0], 10);
+    month = parseInt(slashParts[1], 10);
+    year = parseInt(slashParts[2], 10);
+  } else {
+    const d = new Date(dobStr);
+    if (!isNaN(d)) {
+      return d;
+    }
+    return null;
+  }
+
+  if ([day, month, year].some(v => Number.isNaN(v))) return null;
+  return new Date(year, month - 1, day);
+}
+
+function calculateAgeFromDOBString(dobStr) {
+  const dob = parseDOBString(dobStr);
+  if (!dob || Number.isNaN(dob.getTime())) return null;
+  const today = new Date();
+  let age = today.getFullYear() - dob.getFullYear();
+  const m = today.getMonth() - dob.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < dob.getDate())) {
+    age--;
+  }
+  return age >= 0 ? age : null;
+}
+
 export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
-  const icon = (
-    <div className="profile-icon d-flex align-items-center justify-content-center">
-      {/* simple SVG user icon */}
-      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M12 12c2.761 0 5-2.239 5-5s-2.239-5-5-5-5 2.239-5 5 2.239 5 5 5z" stroke="#fff" strokeWidth="1.2"/>
-        <path d="M3 21c0-3.866 3.134-7 7-7h4c3.866 0 7 3.134 7 7" stroke="#fff" strokeWidth="1.2" strokeLinecap="round"/>
-      </svg>
-    </div>
-  );
+  const age = calculateAgeFromDOBString(player.DOB);
+  
+  const playerImage = player.image 
+  ? require(`../assests/images/${player.image}`)
+  : require(`../assests/images/default-img.png`);
+  // : require(`../assests/images/profile-img.png`);
 
   return (
-    <div className="player-card d-flex gap-3 p-3 rounded-3 shadow-sm border">
-      <div className="card-left profile-icon">
-        {/* {icon} */}
-        <i class="bi bi-person fs-3"></i>
+    <div className="player-card rounded-3 shadow-sm border p-3 d-flex align-items-center gap-3">
+      {/* LEFT: image / icon — takes ~40% */}
+      <div className="card-left d-flex align-items-center justify-content-center">
+        {/* If you switch to an actual image later, replace the <i> with:
+            <img src={player.imageUrl} alt={player.PlayerName} className="player-image" />
+         */}
+        {/* <div className="profile-icon d-flex align-items-center justify-content-center rounded-3 bg-dark"> */}
+        <div className="">
+          {/* <i className="bi bi-person fs-2" aria-hidden="true"></i> */}
+           <img
+              src={playerImage}
+              alt={player.PlayerName}
+              className="player-image"
+            />
+        </div>
       </div>
 
+      {/* RIGHT: details — takes ~60% */}
       <div className="card-right flex-grow-1">
         <div className="d-flex justify-content-between align-items-start">
           <div>
@@ -33,45 +85,87 @@ export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
           </div>
 
           <div className="text-end">
-            <div className="text-muted small">Sr {player.SrNo ?? index + 1}</div>
-            <button className="btn btn-sm btn-outline-danger mt-2" onClick={() => onRemove(index)}>Remove</button>
+            <div className="text-muted small">Sr {player.id ?? index + 1}</div>
+            <button
+              type="button"
+              className="btn btn-sm btn-outline-danger mt-2"
+              onClick={() => onRemove(index)}
+            >
+              Remove
+            </button>
           </div>
         </div>
 
         <div className="row mt-3 gx-2 gy-2">
+          {/* Player Name - READ ONLY */}
           <div className="col-12 col-md-6">
             <label className="form-label small mb-1">Player Name</label>
-            <input className="form-control form-control-sm" value={player.PlayerName ?? ""} onChange={(e) => onChange(index, 'PlayerName', e.target.value)} />
+            <input
+              className="form-control form-control-sm"
+              value={player.PlayerName ?? ""}
+              readOnly
+              disabled
+            />
           </div>
 
+          {/* Team - EDITABLE */}
           <div className="col-12 col-md-6">
             <label className="form-label small mb-1">Team</label>
-            <input className="form-control form-control-sm" value={player.Team ?? ""} onChange={(e) => onChange(index, 'Team', e.target.value)} />
+            <input
+              className="form-control form-control-sm"
+              value={player.Team ?? ""}
+              onChange={(e) => onChange(index, "Team", e.target.value)}
+            />
           </div>
 
-          <div className="col-12">
-            <label className="form-label small mb-1">Address</label>
-            <input className="form-control form-control-sm" value={player.Address ?? ""} onChange={(e) => onChange(index, 'Address', e.target.value)} />
-          </div>
-
+          {/* DOB -> Age */}
           <div className="col-6 col-md-3">
-            <label className="form-label small mb-1">DOB</label>
-            <input type="date" className="form-control form-control-sm" value={player.DOB ?? ""} onChange={(e) => onChange(index, 'DOB', e.target.value)} />
+            <label className="form-label small mb-1">Age</label>
+            <div className="form-control form-control-sm" aria-live="polite">
+              {age !== null ? `${age} yrs` : "—"}
+            </div>
           </div>
 
+          {/* Contact - READ ONLY */}
           <div className="col-6 col-md-3">
             <label className="form-label small mb-1">Contact</label>
-            <input className="form-control form-control-sm" value={player.Contact ?? ""} onChange={(e) => onChange(index, 'Contact', e.target.value)} />
+            <input
+              className="form-control form-control-sm"
+              value={player.Contact ?? ""}
+              readOnly
+              disabled
+            />
           </div>
 
+          {/* Speciality - READ ONLY */}
           <div className="col-6 col-md-3">
             <label className="form-label small mb-1">Speciality</label>
-            <input className="form-control form-control-sm" value={player.Speciality ?? ""} onChange={(e) => onChange(index, 'Speciality', e.target.value)} />
+            <input
+              className="form-control form-control-sm"
+              value={player.Speciality ?? ""}
+              readOnly
+              disabled
+            />
           </div>
 
+          {/* Sold - EDITABLE */}
           <div className="col-6 col-md-3">
-            <label className="form-label small mb-1">Fees</label>
-            <input className="form-control form-control-sm" value={player.Fees ?? ""} onChange={(e) => onChange(index, 'Fees', e.target.value)} />
+            <label className="form-label small mb-1">Sold</label>
+            <input
+              className="form-control form-control-sm"
+              value={player.Sold ?? ""}
+              onChange={(e) => onChange(index, "Sold", e.target.value)}
+            />
+          </div>
+
+          {/* Price - EDITABLE */}
+          <div className="col-6 col-md-3">
+            <label className="form-label small mb-1">Price</label>
+            <input
+              className="form-control form-control-sm"
+              value={player.Price ?? ""}
+              onChange={(e) => onChange(index, "Price", e.target.value)}
+            />
           </div>
         </div>
       </div>
