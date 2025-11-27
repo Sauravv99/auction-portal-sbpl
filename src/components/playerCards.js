@@ -75,7 +75,7 @@ export function PlayerCard({ player = {}, index = 0, onChange, onRemove,viewMode
         <div className="d-flex justify-content-between align-items-start">
           <div>
             <h3 className="mb-0">{player.PlayerName || "Unnamed Player"}</h3>
-            <small className="text-muted">{player.Team || "—"}</small>
+            <small className="">{player.Team || "—"}</small>
           </div>
 
           {/* <div className="text-end">
