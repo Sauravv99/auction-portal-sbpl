@@ -983,30 +983,14 @@ export default function App() {
   console.log("Players",players);
 
   return (
-    <div className="app-container p-4">
+    <div className={`app-container app-${viewMode}`}>
       {error && (
         <div style={{ color: "crimson", marginBottom: 12 }}>
           <strong>Error:</strong> {error}
         </div>
       )}
 
-        <HeaderComponent load={load} addRow={addRow} saveToGist={saveToGist} saving={saving} />
-       <div className="btn-group toggle-btns" role="group" aria-label="View toggle">
-          <button
-            type="button"
-            className={`btn btn-sm ${viewMode === "grid" ? "btn-primary" : "btn-outline-primary"}`}
-            onClick={() => setViewMode("grid")}
-          >
-            Grid
-          </button>
-          <button
-            type="button"
-            className={`btn btn-sm ${viewMode === "carousel" ? "btn-primary" : "btn-outline-primary"}`}
-            onClick={() => setViewMode("carousel")}
-          >
-            Carousel
-          </button>
-        </div>
+        <HeaderComponent load={load} addRow={addRow} saveToGist={saveToGist} saving={saving} viewMode={viewMode} setViewMode={setViewMode} />
 
         {viewMode === "carousel" ? (
               <PlayersCarousel
@@ -1018,6 +1002,7 @@ export default function App() {
                 saveToGist={saveToGist}
                 saving={saving}
                 error={error}
+                viewMode={viewMode}
               />
         ):(
               <PlayerGrid
@@ -1029,6 +1014,7 @@ export default function App() {
                 saveToGist={saveToGist}
                 saving={saving}
                 error={error}
+                viewMode={viewMode}
               />
         )}
     </div>

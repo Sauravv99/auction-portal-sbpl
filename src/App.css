@@ -37,9 +37,19 @@
   }
 }
 
-/* .app-container{
-  background-color: black;
-} */
+.app-container{
+  height: 100vh;
+}
+.app-grid{
+  background-color: white;
+  position: absolute;
+  top: 0%;
+}
+
+.app-carousel{
+  background-color: #232323;
+}
+
 
 .toggle-btns{
       float: inline-end;

@@ -50,7 +50,7 @@ function calculateAgeFromDOBString(dobStr) {
   return age >= 0 ? age : null;
 }
 
-export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
+export function PlayerCard({ player = {}, index = 0, onChange, onRemove,viewMode }) {
   const age = calculateAgeFromDOBString(player.DOB);
   
 
@@ -59,7 +59,7 @@ export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
     : require(`../assests/images/default-img.png`);
 
   return (
-    <div className="player-card rounded-3 shadow-sm border p-3 d-flex align-items-center gap-3">
+    <div className={`player-card player-card-${viewMode} rounded-3 shadow-sm border p-3 d-flex align-items-center gap-3`}>
       <div className="card-left d-flex align-items-center justify-content-center">
         <div className="">
           {/* <i className="bi bi-person fs-2" aria-hidden="true"></i> */}

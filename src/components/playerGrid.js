@@ -8,28 +8,21 @@ export default function PlayerGrid({
   removeRow,
   addRow,      // optional — grid can show an "Add" button if you want
   saving,
+  viewMode
 }) {
   return (
-    <div className="player-grid">
-      <div className="d-flex justify-content-end mb-3">
-        {/* Optional add button */}
-        {typeof addRow === "function" && (
-          <button className="btn btn-sm btn-primary" onClick={addRow}>
-            + Add Player
-          </button>
-        )}
-      </div>
-
+    <div className="player-grid p-4">
       <div className="row gx-3 gy-3">
         {players && players.length > 0 ? (
           players.map((player, idx) => (
-            <div key={player.id ?? idx} className="col-12 col-sm-6 col-lg-4">
+            <div key={player.id ?? idx} className="col-12 col-md-6">
               {/* PlayerCard expects onChange(index, field, value) and onRemove(index) */}
               <PlayerCard
                 player={player}
                 index={idx}
                 onChange={updateItem}
                 onRemove={removeRow}
+                viewMode={viewMode}
               />
             </div>
           ))

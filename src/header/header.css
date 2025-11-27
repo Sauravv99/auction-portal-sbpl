@@ -1,0 +1,15 @@
+.header-logo{
+    width: -webkit-fill-available;
+    height: 292px;
+}
+
+
+.header-section{
+    position: fixed;
+    z-index: 1000;
+    background: white;
+    top: 0%;
+    width: -webkit-fill-available;
+    background-color: black;
+    color: white;
+}

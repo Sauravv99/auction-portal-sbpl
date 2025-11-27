@@ -3,10 +3,31 @@
   @media (max-width: 576px) {
     .player-card { flex-direction: column; align-items: stretch; background-color: #b9dbf8; }
     .card-left { width: 100%; display:flex; justify-content:center; padding-bottom:8px; }
+    .player-grid{
+      margin-top: 15% !important;
+    }
+  }
+
+   @media (max-width: 1200px) {
+    .carousel , .player-grid{
+      margin-top: 25% !important;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .carousel ,.player-grid{
+      margin-top: 35% !important;
+    }
   }
 
 .player-card {
-    background-color: #d0e5f7; 
+    /* background-color: #d0e5f7;  */
+    background-color: #121213;
+    color: aqua;
+}
+
+.player-card-grid{
+  margin: 15px;
 }
 
 /* .profile-icon {
@@ -20,8 +41,8 @@
     align-items: anchor-center;
 } */
 .player-image{
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
   border-radius: 5px;
   margin: 6px 6px;
 }
@@ -40,4 +61,86 @@
   margin: 18px 0px;
   font-style: italic;
   font-weight: 500;
+}
+
+/* .player-grid{
+  margin-top: 5%;
+} */
+
+.carousel,.player-grid{
+  margin-top: 6%;
+}
+
+.player-grid{
+    overflow: scroll;
+    height: inherit;
+}
+
+
+/* 3D perspective for the whole carousel */
+.fancy-carousel {
+  perspective: 1400px;
+}
+
+/* Base state for all items */
+.fancy-carousel .carousel-inner {
+  transform-style: preserve-3d;
+}
+
+.fancy-carousel .carousel-item {
+  backface-visibility: hidden;
+  opacity: 0;
+  transform: scale(0.85) translateY(20px) rotateY(45deg);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+}
+
+/* Active item: visible and straight */
+.fancy-carousel .carousel-item.active {
+  opacity: 1;
+  transform: scale(1) translateY(0) rotateY(0deg);
+  animation: flipInY 0.6s ease both;
+}
+
+/* Make sure the entering slide also gets the effect in both directions */
+.fancy-carousel .carousel-item-next.carousel-item-start,
+.fancy-carousel .carousel-item-prev.carousel-item-end {
+  opacity: 1;
+  transform: scale(1) translateY(0) rotateY(0deg);
+  animation: flipInY 0.6s ease both;
+}
+
+/* Optional: subtle depth for non-active slides */
+.fancy-carousel .carousel-item:not(.active) {
+  z-index: 1;
+}
+
+/* Optional: fancy shadow & hover on the active card */
+.fancy-carousel .carousel-item.active .card,
+.fancy-carousel .carousel-item.active .player-card {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  transition: box-shadow 0.4s ease, transform 0.4s ease;
+}
+
+.fancy-carousel .carousel-item.active .card:hover,
+.fancy-carousel .carousel-item.active .player-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.3);
+}
+
+/* The flip animation keyframes */
+@keyframes flipInY {
+  0% {
+    transform: perspective(1400px) rotateY(90deg) scale(0.85);
+    opacity: 0;
+  }
+  60% {
+    transform: perspective(1400px) rotateY(-10deg) scale(1.02);
+    opacity: 1;
+  }
+  100% {
+    transform: perspective(1400px) rotateY(0deg) scale(1);
+    opacity: 1;
+  }
 }
