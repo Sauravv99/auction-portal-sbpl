@@ -7,6 +7,7 @@ import PlayerGrid from "./components/playerGrid";
 import HeaderComponent from "./header/header";
 import { TeamSpendingGrid } from "./teamsGrid/teamsgrid";
 import { HomeLogin } from "./loginHome/homelogin";
+import AllTeamsComponent from "./allteams/allteamsComponent";
 
 export default function App() {
   const GIST_ID = process.env.REACT_APP_GIST_ID; // or read from env/server later
@@ -20,6 +21,7 @@ export default function App() {
   const [token, setToken] = useState(process.env.REACT_APP_GITHUB_TOKEN);
   const [viewMode, setViewMode] = useState("carousel");
   const [login, setLogin] = useState(false);
+  const [showTeams, setshowTeams] = useState(false);
   const PURSE = 50000000;
 
   const TEAMS = [
@@ -255,32 +257,41 @@ export default function App() {
             saving={saving}
             viewMode={viewMode}
             setViewMode={setViewMode}
+            showTeams={showTeams}
+            setshowTeams={setshowTeams}
           />
-          {viewMode === "carousel" ? (
-            <PlayersCarousel
-              players={players}
-              updateItem={updateItem}
-              removeRow={removeRow}
-              load={load}
-              addRow={addRow}
-              saveToGist={saveToGist}
-              saving={saving}
-              error={error}
-              viewMode={viewMode}
-              ChildComponent={PlayerCard}
-            />
+
+          {!showTeams ? (
+            <>
+              {viewMode === "carousel" ? (
+                <PlayersCarousel
+                  players={players}
+                  updateItem={updateItem}
+                  removeRow={removeRow}
+                  load={load}
+                  addRow={addRow}
+                  saveToGist={saveToGist}
+                  saving={saving}
+                  error={error}
+                  viewMode={viewMode}
+                  ChildComponent={PlayerCard}
+                />
+              ) : (
+                <PlayerGrid
+                  players={players}
+                  updateItem={updateItem}
+                  removeRow={removeRow}
+                  load={load}
+                  addRow={addRow}
+                  saveToGist={saveToGist}
+                  saving={saving}
+                  error={error}
+                  viewMode={viewMode}
+                />
+              )}
+            </>
           ) : (
-            <PlayerGrid
-              players={players}
-              updateItem={updateItem}
-              removeRow={removeRow}
-              load={load}
-              addRow={addRow}
-              saveToGist={saveToGist}
-              saving={saving}
-              error={error}
-              viewMode={viewMode}
-            />
+            <AllTeamsComponent players={players} />
           )}
 
           <div>
@@ -292,9 +303,7 @@ export default function App() {
           </div>
         </>
       ) : (
-        <>
-        {players && <HomeLogin players={players} setLogin={setLogin}/>}
-        </>
+        <>{players && <HomeLogin players={players} setLogin={setLogin} />}</>
       )}
     </div>
   );

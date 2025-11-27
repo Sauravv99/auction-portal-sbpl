@@ -4,7 +4,7 @@ import headerLogo from "../assests/images/sbpl-logo-1.jpg"
 import "./header.css"
 
 export default function HeaderComponent( props ) {
-    const { load,addRow,saveToGist,saving,viewMode,setViewMode } = props;
+    const { load,addRow,saveToGist,saving,viewMode,setViewMode,showTeams,setshowTeams } = props;
   return (
    <div className="header-section pt-2 pb-1 px-4">
     {/* <img className="header-logo" src={headerLogo} alt="logo" /> */}
@@ -27,6 +27,12 @@ export default function HeaderComponent( props ) {
             disabled={saving}
           >
             {saving ? "Saving…" : "Save"}
+          </button>
+          <button
+            className="btn btn-light"
+            onClick={()=> setshowTeams(!showTeams)}
+          >
+             {showTeams ? "Players" : "Teams"}
           </button>
            <div className="btn-group toggle-btns" role="group" aria-label="View toggle">
                 <button

@@ -1,0 +1,132 @@
+/* Wrapper */
+.reserved-grid-wrapper {
+  padding: 1rem 1.5rem;
+}
+
+/* 3 cards per row (2 rows = 6 cards) */
+.reserved-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+/* Card container – same look/feel as carousel card */
+.reserved-team-card {
+  background: radial-gradient(circle at top left, #2a2f4f, #15182b);
+  border-radius: 16px;
+  padding: 16px 18px;
+  color: #ffffff;
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Subtle glow border */
+.reserved-team-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+
+/* Header */
+.reserved-team-card-header {
+  margin-bottom: 12px;
+}
+
+/* Team logo */
+.team-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.4);
+}
+
+.team-logo-fallback {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* Team name & subtitle */
+.team-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.team-subtitle {
+  font-size: 0.85rem;
+  opacity: 0.8;
+}
+
+/* Players list */
+.reserved-team-card-body {
+  margin-top: 8px;
+}
+
+.players-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.player-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  padding: 3px 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+}
+
+.player-row:last-child {
+  border-bottom: none;
+}
+
+.player-index {
+  opacity: 0.7;
+  width: 18px;
+  text-align: right;
+}
+
+.player-name {
+  flex: 1;
+  font-weight: 500;
+}
+
+/* Footer text */
+.team-footer-text {
+  font-size: 0.78rem;
+  opacity: 0.75;
+}
+
+.reserved-grid-wrapper{
+    margin-top: 10%;
+}
+
+/* Responsive: 2 cards / row on medium screens */
+@media (max-width: 992px) {
+  .reserved-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Responsive: 1 card / row on small screens */
+@media (max-width: 600px) {
+  .reserved-grid {
+    grid-template-columns: 1fr;
+  }
+  .reserved-grid-wrapper{
+    margin-top: 30%;
+}
+
+}

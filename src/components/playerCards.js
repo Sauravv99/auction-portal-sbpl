@@ -157,7 +157,7 @@ export function PlayerCard({ player = {}, index = 0, onChange, onRemove,viewMode
                         value={player.Sold ?? ""}
                         onChange={(e) => onChange(index, "Sold", e.target.value)}
                       >
-                        <option value="">Select Team</option>
+                        <option value="">Select</option>
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                       </select>
