@@ -4,7 +4,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import './players.css';
 import { PlayerCard } from "./playerCards";
 
-export default function PlayersCarousel({ players = [], updateItem, removeRow,viewMode, load, addRow, saveToGist, saving, error }) {
+export default function PlayersCarousel({ players = [], updateItem, removeRow,viewMode, load, addRow, saveToGist, saving, error,ChildComponent:ChildComponent }) {
   const carouselId = 'playersCarouselRC';
   const carouselRef = useRef(null);
 
@@ -29,7 +29,7 @@ export default function PlayersCarousel({ players = [], updateItem, removeRow,vi
             <div key={p.SrNo ?? idx} className={`carousel-item ${idx === 0 ? 'active' : ''}`}>
               <div className="d-flex justify-content-center">
                 <div style={{ maxWidth: 900, width: '100%' }}>
-                  <PlayerCard player={p} index={idx} onChange={updateItem} onRemove={removeRow} viewMode={viewMode}/>
+                  <ChildComponent player={p} index={idx} onChange={updateItem} onRemove={removeRow} viewMode={viewMode}/>
                 </div>
               </div>
             </div>

@@ -1,0 +1,156 @@
+.reserved-carousel-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+ margin-top: 0%;
+}
+
+.reserved-carousel {
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* Team card with dark gradient */
+.reserved-team-card {
+  background: radial-gradient(circle at top left, #2d3748, #111827 60%);
+  color: #e5e7eb;
+  border-radius: 18px;
+  padding: 20px 24px;
+  height:max-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Header */
+.reserved-team-card-header {
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.35);
+}
+
+.team-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  object-fit: cover;
+  box-shadow: 0 0 0 2px rgba(148, 163, 184, 0.6);
+}
+
+/* Fallback logo with initials */
+.team-logo-fallback {
+  background: linear-gradient(135deg, #475569, #1e293b);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #e5e7eb;
+}
+
+.team-name {
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+.team-subtitle {
+  font-size: 0.8rem;
+  color: #9ca3af;
+}
+
+/* Players area */
+.reserved-team-card-body {
+  padding-top: 16px;
+}
+
+/* Chips/cards for each player */
+/* .players-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.player-chip {
+  background: rgba(15, 23, 42, 0.85);
+  border-radius: 999px;
+  padding: 8px 14px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  box-shadow: 0 4px 10px rgba(15, 23, 42, 0.5);
+  display: inline-flex;
+  align-items: center;
+  transition: transform 0.18s ease, box-shadow 0.18s ease,
+    border-color 0.18s ease, background 0.18s ease;
+  cursor: default;
+}
+
+.player-chip:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.7);
+  border-color: rgba(129, 140, 248, 0.75);
+  background: rgba(30, 64, 175, 0.7);
+} */
+
+.player-name {
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Footer text */
+.team-footer-text {
+  margin-top: 12px;
+  font-size: 0.75rem;
+  color: #9ca3af;
+}
+
+/* Darken default controls a bit for dark bg */
+.reserved-carousel .carousel-control-prev-icon,
+.reserved-carousel .carousel-control-next-icon {
+  filter: invert(1) grayscale(1);
+}
+
+
+
+/* Vertical players list */
+.players-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Each row */
+.player-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  background: rgba(15, 23, 42, 0.75);
+  border-radius: 8px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  transition: background 0.18s ease, border-color 0.18s ease;
+}
+
+.player-row:hover {
+  background: rgba(30, 64, 175, 0.6);
+  border-color: rgba(129, 140, 248, 0.7);
+}
+
+/* Index number */
+.player-index {
+  font-size: 0.85rem;
+  color: #94a3b8;
+  min-width: 20px;
+}
+
+/* Player name */
+.player-name {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #e5e7eb;
+  letter-spacing: 0.02em;
+}
+
+
+@media (max-width: 600px) {
+  .reserved-team-card{
+    margin-top: 10%;
+  }
+}

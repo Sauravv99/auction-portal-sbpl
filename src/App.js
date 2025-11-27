@@ -1,11 +1,12 @@
 // src/App.jsx
 import React, { useEffect, useState, useCallback } from "react";
-import PlayersCardsBootstrap from "./components/playerCards";
+import PlayersCardsBootstrap, { PlayerCard } from "./components/playerCards";
 import PlayersCarousel from "./components/playerCarousel";
 import "./App.css";
 import PlayerGrid from "./components/playerGrid";
 import HeaderComponent from "./header/header";
 import { TeamSpendingGrid } from "./teamsGrid/teamsgrid";
+import { HomeLogin } from "./loginHome/homelogin";
 
 export default function App() {
   const GIST_ID = process.env.REACT_APP_GIST_ID; // or read from env/server later
@@ -18,6 +19,7 @@ export default function App() {
   const [error, setError] = useState(null);
   const [token, setToken] = useState(process.env.REACT_APP_GITHUB_TOKEN);
   const [viewMode, setViewMode] = useState("carousel");
+  const [login, setLogin] = useState(false);
   const PURSE = 50000000;
 
   const TEAMS = [
@@ -78,7 +80,7 @@ export default function App() {
         team,
         spent: 0,
         remaining: PURSE,
-        playersBought: 0, 
+        playersBought: 0,
       }));
       setTeamStats(zeroStats);
       return;
@@ -89,7 +91,7 @@ export default function App() {
 
     TEAMS.forEach((team) => {
       spendMap[team] = 0;
-      countMap[team] = 0; 
+      countMap[team] = 0;
     });
 
     players.forEach((player) => {
@@ -244,48 +246,56 @@ export default function App() {
         </div>
       )}
 
-      <HeaderComponent
-        load={load}
-        addRow={addRow}
-        saveToGist={saveToGist}
-        saving={saving}
-        viewMode={viewMode}
-        setViewMode={setViewMode}
-      />
+      {login ? (
+        <>
+          <HeaderComponent
+            load={load}
+            addRow={addRow}
+            saveToGist={saveToGist}
+            saving={saving}
+            viewMode={viewMode}
+            setViewMode={setViewMode}
+          />
+          {viewMode === "carousel" ? (
+            <PlayersCarousel
+              players={players}
+              updateItem={updateItem}
+              removeRow={removeRow}
+              load={load}
+              addRow={addRow}
+              saveToGist={saveToGist}
+              saving={saving}
+              error={error}
+              viewMode={viewMode}
+              ChildComponent={PlayerCard}
+            />
+          ) : (
+            <PlayerGrid
+              players={players}
+              updateItem={updateItem}
+              removeRow={removeRow}
+              load={load}
+              addRow={addRow}
+              saveToGist={saveToGist}
+              saving={saving}
+              error={error}
+              viewMode={viewMode}
+            />
+          )}
 
-      {viewMode === "carousel" ? (
-        <PlayersCarousel
-          players={players}
-          updateItem={updateItem}
-          removeRow={removeRow}
-          load={load}
-          addRow={addRow}
-          saveToGist={saveToGist}
-          saving={saving}
-          error={error}
-          viewMode={viewMode}
-        />
+          <div>
+            <TeamSpendingGrid
+              teamStats={teamStats}
+              purse={PURSE}
+              formatINR={formatINR}
+            />
+          </div>
+        </>
       ) : (
-        <PlayerGrid
-          players={players}
-          updateItem={updateItem}
-          removeRow={removeRow}
-          load={load}
-          addRow={addRow}
-          saveToGist={saveToGist}
-          saving={saving}
-          error={error}
-          viewMode={viewMode}
-        />
+        <>
+        {players && <HomeLogin players={players} setLogin={setLogin}/>}
+        </>
       )}
-
-      <div>
-        <TeamSpendingGrid
-          teamStats={teamStats}
-          purse={PURSE}
-          formatINR={formatINR}
-        />
-      </div>
     </div>
   );
 }

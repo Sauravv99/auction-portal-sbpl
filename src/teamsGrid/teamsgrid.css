@@ -29,7 +29,7 @@
 ================================ */
 .team-card {
   position: relative;
-  height: 200px;
+  height: 210px;
   background: radial-gradient(circle at top left, #202842, #111827);
   border-radius: 18px;
   padding: 16px 18px;
@@ -206,7 +206,7 @@
 .team-maxbid-wrapper {
   position: absolute;
   width: max-content;
-  bottom: 0%;
+  bottom: -1%;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
