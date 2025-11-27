@@ -39,11 +39,9 @@
 
 .app-container{
   height: 100vh;
-}
-.app-grid{
-  background-color: white;
-  position: absolute;
-  top: 0%;
+  background-color: #232323;
+  margin-top: -1%;
+  overflow: scroll;
 }
 
 .app-carousel{

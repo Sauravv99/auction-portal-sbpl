@@ -8,22 +8,47 @@
     }
   }
 
-   @media (max-width: 1200px) {
+   @media (min-width: 1200px) {
     .carousel , .player-grid{
-      margin-top: 25% !important;
+      margin-top: 7% !important;
+    }
+  }
+   @media (min-width: 650px) and (max-width:850px) {
+    .carousel , .player-grid{
+      margin-top: 22% !important;
+    }
+  }
+   @media (min-width: 850px) and (max-width:1200px) {
+    .carousel , .player-grid{
+      margin-top: 15% !important;
     }
   }
 
-  @media (max-width: 500px) {
+   /* @media (max-width: 1200px) {
+    .carousel , .player-grid{
+      margin-top: 25% !important;
+    }
+  } */
+
+  @media (max-width: 650px) {
     .carousel ,.player-grid{
       margin-top: 35% !important;
     }
   }
 
+
+
+
+@media (min-width: 800px) {
+   .player-card {
+    height: 400px;
+}
+}
+
 .player-card {
     /* background-color: #d0e5f7;  */
     background-color: #121213;
-    color: aqua;
+    color: white;
 }
 
 .player-card-grid{
@@ -41,8 +66,8 @@
     align-items: anchor-center;
 } */
 .player-image{
-  width: 200px;
-  height: 200px;
+  width: 280px;
+  height: 280px;
   border-radius: 5px;
   margin: 6px 6px;
 }
@@ -61,6 +86,7 @@
   margin: 18px 0px;
   font-style: italic;
   font-weight: 500;
+  color: aqua;
 }
 
 /* .player-grid{
