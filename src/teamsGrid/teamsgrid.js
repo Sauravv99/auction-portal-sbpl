@@ -58,7 +58,7 @@ export function TeamSpendingGrid({ teamStats, purse, formatINR }) {
               </div>
               <div className="team-metric remaining">
                 <span>Remaining</span>
-                <strong>{formatINR(Math.max(remaining, 0))}</strong>
+                <strong className="remaining-purse">{formatINR(Math.max(remaining, 0))}</strong>
               </div>
             </div>
           </div>
