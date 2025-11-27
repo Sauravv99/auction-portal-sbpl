@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
-import defaultImg from "../assests/images/profile-img.png";
+import defaultImg from "../assests/images/default-img.png";
 import "./players.css";
 
 function parseDOBString(dobStr) {
@@ -52,11 +52,11 @@ function calculateAgeFromDOBString(dobStr) {
 
 export function PlayerCard({ player = {}, index = 0, onChange, onRemove }) {
   const age = calculateAgeFromDOBString(player.DOB);
+  
 
-  const playerImage = player.image
-    ? require(`../assests/images/${player.image}`)
+  const playerImage = player.Image
+    ?require(`../assests/playerImages/player-image-${player["Sr No"]}.jpg`)
     : require(`../assests/images/default-img.png`);
-  // : require(`../assests/images/profile-img.png`);
 
   return (
     <div className="player-card rounded-3 shadow-sm border p-3 d-flex align-items-center gap-3">
