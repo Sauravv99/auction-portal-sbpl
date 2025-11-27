@@ -52,3 +52,16 @@
 .toggle-btns{
       float: inline-end;
 }
+
+body{
+  font-family:Arial, Helvetica, sans-serif
+}
+
+
+/* .app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+} */
+
+/* Wrapper for the bottom section */

@@ -1,0 +1,150 @@
+
+.team-spending-wrapper {
+  /* margin: 32px auto 24px; */
+  padding: 0 16px 32px;
+  max-width: -webkit-fill-available;
+}
+
+.team-spending-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  text-align: center;
+  letter-spacing: 0.03em;
+  color: white;
+}
+
+/* Responsive grid of cards */
+.team-spending-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+/* Single card */
+.team-card {
+  background: radial-gradient(circle at top left, #202842, #111827);
+  border-radius: 18px;
+  padding: 16px 18px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  width: fit-content;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  color: #f9fafb;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.team-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 35px rgba(15, 23, 42, 0.8);
+  border-color: rgba(96, 165, 250, 0.7);
+}
+
+.team-card-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* "Logo" circle with initials */
+.team-logo-circle {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #22c55e, #0ea5e9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1rem;
+  color: #0b1120;
+  flex-shrink: 0;
+}
+
+.team-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.team-name {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.team-purse {
+  font-size: 0.78rem;
+  opacity: 0.8;
+}
+
+/* Right side metrics */
+.team-card-right {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  align-items: flex-end;
+}
+
+.team-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.team-metric span {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.75;
+}
+
+.team-metric strong {
+  font-size: 0.9rem;
+  margin-top: 1px;
+}
+
+.team-metric.spent strong {
+  color: #f97316;
+}
+
+.team-metric.remaining strong {
+  color: #22c55e;
+}
+
+/* Small screens */
+@media (max-width: 600px) {
+  .team-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .team-card-right {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .team-card-right .team-metric {
+    align-items: flex-start;
+  }
+}
+
+
+.team-logos{
+    width: 46px;
+    height: 46px;
+    border-radius: 999px;
+    /* background: linear-gradient(135deg, #22c55e, #0ea5e9); */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    color: #0b1120;
+    flex-shrink: 0;
+}

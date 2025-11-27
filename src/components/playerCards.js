@@ -186,6 +186,7 @@ export function PlayerCard({ player = {}, index = 0, onChange, onRemove,viewMode
                         <option value="CSK">CSK</option>
                         <option value="KKR">KKR</option>
                         <option value="SSS">SSS</option>
+                        <option value="Nagpur Titans">Nagpur Titans</option>
                         <option value="Director King - Srimali Warriors">
                           Director King - Srimali Warriors
                         </option>

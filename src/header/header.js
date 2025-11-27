@@ -6,7 +6,7 @@ import "./header.css"
 export default function HeaderComponent( props ) {
     const { load,addRow,saveToGist,saving,viewMode,setViewMode } = props;
   return (
-   <div className="header-section py-1 px-4">
+   <div className="header-section pt-2 pb-1 px-4">
     {/* <img className="header-logo" src={headerLogo} alt="logo" /> */}
       <div className="d-md-flex justify-content-between align-items-center mb-3">
         <div>
