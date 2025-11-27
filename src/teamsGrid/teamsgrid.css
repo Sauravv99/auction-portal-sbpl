@@ -1,6 +1,7 @@
-
+/* ================================
+   WRAPPER + TITLE
+================================ */
 .team-spending-wrapper {
-  /* margin: 32px auto 24px; */
   padding: 0 16px 32px;
   max-width: -webkit-fill-available;
 }
@@ -14,15 +15,21 @@
   color: white;
 }
 
-/* Responsive grid of cards */
+/* ================================
+   GRID
+================================ */
 .team-spending-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 10px;
 }
 
-/* Single card */
+/* ================================
+   CARD
+================================ */
 .team-card {
+  position: relative;
+  height: 200px;
   background: radial-gradient(circle at top left, #202842, #111827);
   border-radius: 18px;
   padding: 16px 18px;
@@ -43,13 +50,21 @@
   border-color: rgba(96, 165, 250, 0.7);
 }
 
+/* Squad complete visual */
+.team-card-complete {
+  opacity: 0.65;
+  filter: grayscale(0.3);
+}
+
+/* ================================
+   LEFT SIDE (LOGO + TEAM)
+================================ */
 .team-card-left {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-/* "Logo" circle with initials */
 .team-logo-circle {
   width: 46px;
   height: 46px;
@@ -58,10 +73,15 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-weight: 800;
-  font-size: 1rem;
-  color: #0b1120;
   flex-shrink: 0;
+}
+
+.team-logos {
+  width: 55px;
+  height: 55px;
+  border-radius: 999px;
+  object-fit: cover;
+  display: block;
 }
 
 .team-info {
@@ -75,12 +95,14 @@
   margin-bottom: 2px;
 }
 
-.team-purse {
-  font-size: 0.78rem;
+.team-squad-text {
+  font-size: 0.7rem;
   opacity: 0.8;
 }
 
-/* Right side metrics */
+/* ================================
+   RIGHT SIDE (SPENT / REMAINING)
+================================ */
 .team-card-right {
   display: flex;
   flex-direction: column;
@@ -104,18 +126,122 @@
 .team-metric strong {
   font-size: 1.2rem;
   margin-top: 1px;
+
 }
 
 .team-metric.spent strong {
   color: #f97316;
+  font-size: 1rem;
 }
 
-.team-metric.remaining strong {
+.team-metric.remaining strong,
+.remaining-purse {
   color: #22c55e;
 }
 
+/* ================================
+   TOP-LEFT BADGE (PLAYERS BOUGHT)
+================================ */
+.team-count-badge {
+  position: absolute;
+  z-index: 1000;
+  top: -6px;
+  left: -6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #38bdf8, #2563eb);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 800;
+  box-shadow: 0 6px 15px rgba(37, 99, 235, 0.45);
+  border: 2px solid #0f172a;
+  transition: transform 0.15s ease, box-shadow 0.15s ease,
+    background 0.15s ease;
+}
 
-/* Small screens */
+/* 🔴 When maxBid === BASE_PRICE */
+.team-count-critical {
+  background: linear-gradient(135deg, #ef4444, #b91c1c);
+  box-shadow: 0 6px 15px rgba(239, 68, 68, 0.65);
+}
+
+/* ✅ When squad complete */
+.team-count-complete {
+  background: linear-gradient(135deg, #4ade80, #16a34a);
+}
+
+.team-card:hover .team-count-badge {
+  transform: scale(1.1);
+}
+
+/* ================================
+   TOP PROGRESS BAR (SQUAD COMPLETION)
+================================ */
+.team-progress-bar {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  top: 8px;              /* ⬅ at the top now */
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.6);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.team-progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #22c55e, #a3e635);
+  transition: width 0.2s ease-out;
+}
+
+/* ================================
+   MAX BID (BOTTOM CENTER)
+================================ */
+.team-maxbid-wrapper {
+  position: absolute;
+  width: max-content;
+  bottom: 0%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+}
+
+.team-maxbid {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  display: inline-block;
+}
+
+/* 🟡 Low purse warning style */
+.team-maxbid-warning {
+  background: rgba(180, 83, 9, 0.95);
+  color: #fffbeb;
+}
+
+.team-maxbid-subtext {
+  margin-top: 2px;
+  font-size: 0.65rem;
+  color: #fbbf24;
+}
+
+.squad-complete-text {
+  background: rgba(15, 23, 42, 0.9);
+  color: #bbf7d0;
+}
+
+/* ================================
+   RESPONSIVE
+================================ */
 @media (max-width: 600px) {
   .team-card {
     flex-direction: column;
@@ -134,19 +260,4 @@
   .team-card-right .team-metric {
     align-items: flex-start;
   }
-}
-
-
-.team-logos{
-    width: 46px;
-    height: 46px;
-    border-radius: 999px;
-    /* background: linear-gradient(135deg, #22c55e, #0ea5e9); */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 800;
-    font-size: 1rem;
-    color: #0b1120;
-    flex-shrink: 0;
 }

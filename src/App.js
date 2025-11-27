@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import PlayersCardsBootstrap from "./components/playerCards";
 import PlayersCarousel from "./components/playerCarousel";
-import "./App.css"
+import "./App.css";
 import PlayerGrid from "./components/playerGrid";
 import HeaderComponent from "./header/header";
 import { TeamSpendingGrid } from "./teamsGrid/teamsgrid";
@@ -18,7 +18,7 @@ export default function App() {
   const [error, setError] = useState(null);
   const [token, setToken] = useState(process.env.REACT_APP_GITHUB_TOKEN);
   const [viewMode, setViewMode] = useState("carousel");
-  const PURSE= 50000000;
+  const PURSE = 50000000;
 
   const TEAMS = [
     "KKR",
@@ -29,7 +29,7 @@ export default function App() {
     "Nagpur Titans",
     // add the 6th team name here if you have it, e.g. "Bombaywala 11"
   ];
-  
+
   const [teamStats, setTeamStats] = useState([]);
 
   const load = useCallback(async () => {
@@ -37,8 +37,10 @@ export default function App() {
     setLoading(true);
     try {
       const res = await fetch(`${GIST_API}?t=${Date.now()}`, {
-        headers: { Authorization: `token ${token}`, Accept: "application/vnd.github+json" }, // public read
-    
+        headers: {
+          Authorization: `token ${token}`,
+          Accept: "application/vnd.github+json",
+        }, // public read
       });
       if (!res.ok) {
         const txt = await res.text();
@@ -63,87 +65,56 @@ export default function App() {
     load();
   }, [load]);
 
-  // 💡 helper for INR formatting
-    const formatINR = (value) =>
-      new Intl.NumberFormat("en-IN", {
-        style: "currency",
-        currency: "INR",
-        maximumFractionDigits: 0,
-      }).format(value);
-  
-    // 💰 compute team spending whenever players change
-    useEffect(() => {
-      if (!players || players.length === 0) {
-        // still create zero records for all teams
-        const zeroStats = TEAMS.map((team) => ({
-          team,
-          spent: 0,
-          remaining: PURSE,
-        }));
-        setTeamStats(zeroStats);
-        return;
+  const formatINR = (value) =>
+    new Intl.NumberFormat("en-IN", {
+      style: "currency",
+      currency: "INR",
+      maximumFractionDigits: 0,
+    }).format(value);
+
+  useEffect(() => {
+    if (!players || players.length === 0) {
+      const zeroStats = TEAMS.map((team) => ({
+        team,
+        spent: 0,
+        remaining: PURSE,
+        playersBought: 0, 
+      }));
+      setTeamStats(zeroStats);
+      return;
+    }
+
+    const spendMap = {};
+    const countMap = {};
+
+    TEAMS.forEach((team) => {
+      spendMap[team] = 0;
+      countMap[team] = 0; 
+    });
+
+    players.forEach((player) => {
+      if (player.Sold === "Yes" && spendMap.hasOwnProperty(player.Team)) {
+        spendMap[player.Team] += Number(player.Price || 0);
+        countMap[player.Team] += 1; // ✅ added
       }
-  
-      // Start with 0 spending for each static team
-      const spendMap = {};
-      TEAMS.forEach((team) => {
-        spendMap[team] = 0;
-      });
-  
-      // Sum up spending for Sold players only, and only for our static teams
-      players.forEach((player) => {
-        if (player.Sold === "Yes" && spendMap.hasOwnProperty(player.Team)) {
-          spendMap[player.Team] += Number(player.Price || 0);
-        }
-      });
-  
-      const stats = TEAMS.map((team) => {
-        const spent = spendMap[team] || 0;
-        const remaining = PURSE - spent;
-        return { team, spent, remaining };
-      });
-  
-      setTeamStats(stats);
-    }, [players]);
+    });
 
+    const stats = TEAMS.map((team) => {
+      const spent = spendMap[team] || 0;
+      const bought = countMap[team] || 0;
+      const remaining = PURSE - spent;
 
-//   const calculateSpending = () => {
-//     const teamSpend = {};
+      return {
+        team,
+        spent,
+        remaining,
+        playersBought: bought,
+      };
+    });
 
-//     players.forEach((player) => {
-//       if (player.Sold === "Yes") {
-//         if (!teamSpend[player.Team]) {
-//           teamSpend[player.Team] = 0;
-//         }
-//         teamSpend[player.Team] += Number(player.Price || 0);
-//       }
-//     });
+    setTeamStats(stats);
+  }, [players]);
 
-//     // Final result with remaining purse
-//     const result = Object.entries(teamSpend).map(([team, spent]) => ({
-//       team,
-//       spent,
-//       remaining: PURSE - spent,
-//     }));
-
-//     console.log(result);
-//   };
-
-//   useEffect(() => {
-//   if (!players || players.length === 0) return;
-
-//   const timer = setTimeout(() => {
-//     calculateSpending();
-//   }, 3000);
-
-//  return () => {
-//     clearTimeout(timer);
-//   };
-//    // cleanup on unmount / players change
-// }, [players, calculateSpending]);
-
-  // helpers for editing
-  
   function updateItem(index, field, value) {
     setPlayers((prev) => {
       const copy = (prev || []).map((it) => ({ ...it }));
@@ -152,24 +123,23 @@ export default function App() {
     });
   }
 
-//   function updateItem(index, field, value) {
-//   console.log("fields", field, value);
+  //   function updateItem(index, field, value) {
+  //   console.log("fields", field, value);
 
-//   setPlayers((prev) => {
-//     const copy = (prev || []).map((it) => ({ ...it }));
+  //   setPlayers((prev) => {
+  //     const copy = (prev || []).map((it) => ({ ...it }));
 
-//     // Update the field normally
-//     copy[index] = { ...copy[index], [field]: value };
+  //     // Update the field normally
+  //     copy[index] = { ...copy[index], [field]: value };
 
-//     // Additional logic for Sold
-//     if (field === "Sold") {
-//       copy[index].Reserved = value === "Yes";
-//     }
+  //     // Additional logic for Sold
+  //     if (field === "Sold") {
+  //       copy[index].Reserved = value === "Yes";
+  //     }
 
-//     return copy;
-//   });
-// }
-
+  //     return copy;
+  //   });
+  // }
 
   function addRow() {
     setPlayers((prev) => [
@@ -274,41 +244,48 @@ export default function App() {
         </div>
       )}
 
-        <HeaderComponent load={load} addRow={addRow} saveToGist={saveToGist} saving={saving} viewMode={viewMode} setViewMode={setViewMode} />
+      <HeaderComponent
+        load={load}
+        addRow={addRow}
+        saveToGist={saveToGist}
+        saving={saving}
+        viewMode={viewMode}
+        setViewMode={setViewMode}
+      />
 
-        {viewMode === "carousel" ? (
-              <PlayersCarousel
-                players={players}
-                updateItem={updateItem}
-                removeRow={removeRow}
-                load={load}
-                addRow={addRow}
-                saveToGist={saveToGist}
-                saving={saving}
-                error={error}
-                viewMode={viewMode}
-              />
-        ):(
-              <PlayerGrid
-                players={players}
-                updateItem={updateItem}
-                removeRow={removeRow}
-                load={load}
-                addRow={addRow}
-                saveToGist={saveToGist}
-                saving={saving}
-                error={error}
-                viewMode={viewMode}
-              />
-        )}
+      {viewMode === "carousel" ? (
+        <PlayersCarousel
+          players={players}
+          updateItem={updateItem}
+          removeRow={removeRow}
+          load={load}
+          addRow={addRow}
+          saveToGist={saveToGist}
+          saving={saving}
+          error={error}
+          viewMode={viewMode}
+        />
+      ) : (
+        <PlayerGrid
+          players={players}
+          updateItem={updateItem}
+          removeRow={removeRow}
+          load={load}
+          addRow={addRow}
+          saveToGist={saveToGist}
+          saving={saving}
+          error={error}
+          viewMode={viewMode}
+        />
+      )}
 
-        <div>
-           <TeamSpendingGrid
-            teamStats={teamStats}
-            purse={PURSE}
-            formatINR={formatINR}
-          />
-        </div>
+      <div>
+        <TeamSpendingGrid
+          teamStats={teamStats}
+          purse={PURSE}
+          formatINR={formatINR}
+        />
+      </div>
     </div>
   );
 }
