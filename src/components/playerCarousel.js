@@ -7,7 +7,6 @@ import { PlayerCard } from "./playerCards";
 export default function PlayersCarousel({ players = [], updateItem, removeRow,viewMode, load, addRow, saveToGist, saving, error,ChildComponent:ChildComponent }) {
   const carouselId = 'playersCarouselRC';
   const carouselRef = useRef(null);
-
   useEffect(() => {
     const el = carouselRef.current;
     if (!el) return;

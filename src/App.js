@@ -353,6 +353,9 @@ export default function App() {
 
   const [teamStats, setTeamStats] = useState([]);
 
+  // const [filteredPlayers, setfilteredPlayers] = useState([]);
+  // const [filterMode,setFilterMode ] =useState("all");
+
   const load = useCallback(async () => {
     setError(null);
     setLoading(true);
@@ -374,6 +377,8 @@ export default function App() {
       // ensure we have an array (if top-level object, adapt accordingly)
       const arr = Array.isArray(parsed) ? parsed : parsed.items ?? parsed;
       setPlayers(Array.isArray(arr) ? arr : []);
+      // const filtered= filterPlayers("all");
+      // setfilteredPlayers(Array.isArray(arr) ? arr : []);
     } catch (err) {
       setError(err.message || String(err));
       setPlayers([]);
@@ -551,6 +556,9 @@ export default function App() {
       setPlayers(
         Array.isArray(parsedBack) ? parsedBack : parsedBack.items ?? parsedBack
       );
+      // const nextData =  Array.isArray(parsedBack) ? parsedBack : parsedBack.items ?? parsedBack;
+      // const filtered= filterPlayers(filterMode);
+      // setfilteredPlayers(filtered);
       alert("Saved to gist successfully.");
     } catch (err) {
       setError(err.message || String(err));
@@ -558,6 +566,24 @@ export default function App() {
       setSaving(false);
     }
   }
+
+
+//  function filterPlayers(filterMode) {
+//   if (!Array.isArray(players)) return [];
+//   switch (filterMode) {
+//     case "sold":
+//       return players.filter((p) => p.Sold === "Yes");
+//     case "unsold":
+//       return players.filter((p) => p.Sold !== "Yes" && p.Reserved!=true);
+//     case "reserved":
+//       return players.filter((p) => p.Reserved === true);
+
+//     case "all":
+//     default:
+//       return players;
+//   }
+// }
+
 
   if (loading) return <div style={{ padding: 16 }}>Loading…</div>;
 
@@ -580,7 +606,11 @@ export default function App() {
             setViewMode={setViewMode}
             showTeams={showTeams}
             setshowTeams={setshowTeams}
-            onLogout={handleLogout} // ✅ pass logout handler to header
+            onLogout={handleLogout}
+            players={players}
+            // filterPlayers={filterPlayers}
+            // filterMode={filterMode}
+            // setFilterMode={setFilterMode}
           />
 
           {!showTeams ? (
@@ -588,6 +618,8 @@ export default function App() {
               {viewMode === "carousel" ? (
                 <PlayersCarousel
                   players={players}
+                  // players={filteredPlayers}
+                  // filteredPlayers={filteredPlayers}
                   updateItem={updateItem}
                   removeRow={removeRow}
                   load={load}
@@ -601,6 +633,8 @@ export default function App() {
               ) : (
                 <PlayerGrid
                   players={players}
+                  // players={filteredPlayers}
+                  // filteredPlayers={filteredPlayers}
                   updateItem={updateItem}
                   removeRow={removeRow}
                   load={load}
