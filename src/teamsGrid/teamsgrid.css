@@ -33,7 +33,7 @@
   background: radial-gradient(circle at top left, #202842, #111827);
   border-radius: 18px;
   padding: 16px 18px;
-  display: flex;
+  /* display: flex; */
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -255,6 +255,7 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-top: 10%;
   }
 
   .team-card-right .team-metric {

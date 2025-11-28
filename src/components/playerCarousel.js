@@ -50,3 +50,6 @@ export default function PlayersCarousel({ players = [], updateItem, removeRow,vi
     </div>
   );
 }
+
+
+

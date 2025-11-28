@@ -4,7 +4,7 @@ import headerLogo from "../assests/images/sbpl-logo-1.jpg"
 import "./header.css"
 
 export default function HeaderComponent( props ) {
-    const { load,addRow,saveToGist,saving,viewMode,setViewMode,showTeams,setshowTeams } = props;
+    const { load,addRow,saveToGist,saving,viewMode,setViewMode,showTeams,setshowTeams,onLogout } = props;
   return (
    <div className="header-section pt-2 pb-1 px-4">
     {/* <img className="header-logo" src={headerLogo} alt="logo" /> */}
@@ -50,6 +50,12 @@ export default function HeaderComponent( props ) {
                   Slides
                 </button>
           </div>
+           <button
+            className="btn btn-light"
+            onClick={onLogout}
+          >
+             Logout
+          </button>
         </div>
       </div>
      
