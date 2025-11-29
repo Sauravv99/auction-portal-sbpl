@@ -53,9 +53,13 @@ function calculateAgeFromDOBString(dobStr) {
 export function PlayerCard({ player = {}, index = 0, onChange, onRemove,viewMode }) {
   const age = calculateAgeFromDOBString(player.DOB);
   
+function toLowerNoSpace(text) {
+  if (typeof text !== "string") return "";
+  return text.toLowerCase().replace(/\s+/g, "");
+}
 
   const playerImage = player.Image
-    ?require(`../assests/playerImages/player-image-${player["Sr No"]}.jpg`)
+    ?require(`../assests/playerImages/image-${toLowerNoSpace(player.PlayerName)}.jpg`)
     : require(`../assests/images/default-img.png`);
 
   return (

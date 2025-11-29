@@ -13,3 +13,10 @@
     background-color: black;
     color: white;
 }
+
+@media (max-width:650px) {
+.dwnld-btn{
+    position: absolute;
+    top: 11%;
+}   
+}

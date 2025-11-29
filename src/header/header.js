@@ -97,7 +97,7 @@ export default function HeaderComponent(props) {
 
           {!showTeams ? (
             <button
-              className="btn btn-success"
+              className="btn btn-success dwnld-btn"
               onClick={() => exportPlayersToExcel(players,"SBPL-Auction-Data")}
             >
               <i className="bi bi-download"></i> Download Excel
