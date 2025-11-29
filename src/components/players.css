@@ -170,3 +170,12 @@
     opacity: 1;
   }
 }
+
+
+
+.team-name-class{
+    color: darkorange;
+    font-weight: 900;
+    font-size: 1.1rem;
+    font-style: italic;
+}

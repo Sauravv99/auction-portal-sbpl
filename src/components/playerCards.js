@@ -79,7 +79,7 @@ function toLowerNoSpace(text) {
         <div className="d-flex justify-content-between align-items-start">
           <div>
             <h3 className="mb-0">{player.PlayerName || "Unnamed Player"}</h3>
-            <small className="">{player.Team || "—"}</small>
+            <small className="team-name-class">{player.Team || "—"}</small>
           </div>
 
           {/* <div className="text-end">

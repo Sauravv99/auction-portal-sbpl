@@ -328,7 +328,9 @@ export default function App() {
   const GIST_ID = process.env.REACT_APP_GIST_ID; // or read from env/server later
   const FILE_NAME = "players_list.json";
   const GIST_API = `https://api.github.com/gists/${GIST_ID}`;
-
+  const API_BASE = process.env.REACT_APP_API_URL || "http://localhost:5000"; // render URL in prod
+  console.log("API_BASE",API_BASE);
+  
   const [players, setPlayers] = useState(null); // parsed array
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -505,10 +507,24 @@ export default function App() {
     alert("Token saved to localStorage (demo only).");
   }
 
+
+  
+async function mongoUpdatePlayers(playersArray) {
+  const res = await fetch(`${API_BASE}/api/players`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(playersArray), // send whole array
+  });
+
+  if (!res.ok) throw new Error("Failed to update players");
+  return res.json(); // updated array from backend
+}
+
   // patch gist: update only the data file with new content
   async function saveToGist() {
     setError(null);
-
     // validate items is JSON serializable
     let payload;
     try {
@@ -556,14 +572,24 @@ export default function App() {
       setPlayers(
         Array.isArray(parsedBack) ? parsedBack : parsedBack.items ?? parsedBack
       );
-      // const nextData =  Array.isArray(parsedBack) ? parsedBack : parsedBack.items ?? parsedBack;
-      // const filtered= filterPlayers(filterMode);
-      // setfilteredPlayers(filtered);
       alert("Saved to gist successfully.");
     } catch (err) {
       setError(err.message || String(err));
     } finally {
-      setSaving(false);
+
+      try {
+        setSaving(true);
+        setError("");
+        const updated = await mongoUpdatePlayers(players);
+        setPlayers(updated); // refresh from backend (optional)
+        alert("Players updated in MongoDB ✅");
+      } catch (err) {
+        console.error(err);
+        setError("Failed to update players");
+      } finally {
+        setSaving(false);
+      }
+  
     }
   }
 
